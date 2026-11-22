@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below, together with the works listed in docs/REFERENCES.md."
+title: "Ego2Humanoid: From Egocentric RGB Video to Physically Validated Humanoid Manipulation"
+type: software
+authors:
+  - alias: kevinlisun
+version: 0.3.0
+date-released: 2026-11-22
+license: Apache-2.0
+repository-code: "https://github.com/kevinlisun/ego2humanoid"
+abstract: >-
+  Ego2Humanoid turns one egocentric RGB clip of a person performing a pick-and-place task into an
+  action-controlled MuJoCo rollout of a Unitree G1 humanoid with Dex3-1 or Sharpa Wave hands. RGB-only
+  perception (monocular geometry, 3D hands, vision-to-tactile contact, open-vocabulary objects, image-to-3D
+  meshes) feeds a kinematic retargeting stage with closed-loop grasp correction; acceptance requires
+  independent pick-place events on the achieved object state.
+keywords:
+  - humanoid robotics
+  - dexterous manipulation
+  - egocentric video
+  - motion retargeting
+  - real-to-sim
+  - MuJoCo

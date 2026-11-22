@@ -1,0 +1,12 @@
+data/
+runs/
+.git/
+.venv/
+.venv-mujoco/
+__pycache__/
+*.mp4
+*.npz
+third_party/*
+!third_party/mujoco
+docs/
+tests/

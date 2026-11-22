@@ -1,0 +1,104 @@
+version: sim_params/1
+objects: {}
+table:
+  top_z_m: null
+scene:
+  source_from: grip
+  max_registration_m: 0.15
+contact:
+  priority: 1
+  condim: 4
+  solref:
+  - 0.01
+  - 1.0
+  solimp:
+  - 0.95
+  - 0.99
+  - 0.001
+  min_slide_friction: 1.0
+  torsion_m: 0.01
+  roll_m: 0.0001
+  impratio: 10.0
+  cone: elliptic
+  noslip_iterations: 5
+  table_friction:
+  - 1.0
+  - 0.005
+  - 0.0001
+pd:
+  groups:
+    hand:
+      kp: 8.0
+      kd: 0.4
+      max_torque_nm: 6.0
+      armature: 0.005
+    wrist:
+      kp: 40.0
+      kd: 2.0
+      max_torque_nm: 20.0
+      armature: 0.01
+    shoulder:
+      kp: 150.0
+      kd: 6.0
+      max_torque_nm: 60.0
+      armature: 0.02
+    elbow:
+      kp: 150.0
+      kd: 6.0
+      max_torque_nm: 60.0
+      armature: 0.02
+    waist:
+      kp: 300.0
+      kd: 10.0
+      max_torque_nm: 100.0
+      armature: 0.02
+    legs:
+      kp: 300.0
+      kd: 10.0
+      max_torque_nm: 150.0
+      armature: 0.02
+  heavy_hand_wrist_scale: 2.5
+  gravity_compensation: true
+  timestep_s: 0.002
+  integrator: implicitfast
+trajectory:
+  squeeze_m: 0.012
+  grip_min_n: 4.0
+  carry_accel_m_s2: 3.0
+  approach_frames: 30
+  open_margin_m: 0.02
+  open_pad_m: 0.015
+  pad_reach_m: 0.015
+  tip_floor_m: 0.006
+  max_open_extra_m: 0.04
+  close_ramp_frames: 6
+  close_lead_frames: 12
+  hover_clearance_m: 0.015
+  max_hover_rise_m: 0.06
+  place_dwell_frames: 15
+  place_lead_frames: 20
+  place_xy_lead_frames: 25
+  release_open_frames: 6
+  retreat_frames: 8
+  retreat_height_m: 0.04
+  retreat_blend_frames: 10
+  bare_place_lift_m: 0.003
+  max_offset_m: 0.2
+  start_search_m: 0.03
+  min_object_thickness_m: 0.04
+  slab_max_width_m: 0.025
+  table_margin_m: 0.3
+  table_inset_m: 0.05
+  table_near_edge_m: 0.1
+  scene_table_margin_m: 0.08
+  obstacle_margin_m: 0.02
+  held_margin_m: 0.02
+  held_clearance_m: 0.005
+  place_clearance_m: 0.01
+  receptacle_opening_margin_m: 0.0
+  place_retry_budget_s: 1800.0
+  place_reach_weight_m: 0.1
+  place_stance_search: true
+  scene_objects: true
+  adjust_stance: true
+  allow_held_box_fallback: false

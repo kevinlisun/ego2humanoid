@@ -1,0 +1,55 @@
+{
+ "object_width_m": 0.03,
+ "pinch_point_wrist_m": [
+  0.102,
+  0.07,
+  0.02
+ ],
+ "stages": {
+  "touch": {
+   "joints": {
+    "right_thumb_CMC_FE": 0.7989,
+    "right_thumb_CMC_AA": 0.1695,
+    "right_thumb_MCP_FE": 0.7059,
+    "right_thumb_MCP_AA": -0.3491,
+    "right_thumb_IP": 0.3502,
+    "right_index_MCP_FE": 0.8957,
+    "right_index_MCP_AA": 0.1993,
+    "right_index_PIP": 1.1956,
+    "right_index_DIP": 0.6132
+   },
+   "gap_m": 0.0355,
+   "tip_err_m": 0.004
+  },
+  "squeeze": {
+   "joints": {
+    "right_thumb_CMC_FE": 0.7506,
+    "right_thumb_CMC_AA": 0.1154,
+    "right_thumb_MCP_FE": 0.8121,
+    "right_thumb_MCP_AA": -0.3491,
+    "right_thumb_IP": 0.4199,
+    "right_index_MCP_FE": 0.8161,
+    "right_index_MCP_AA": 0.2018,
+    "right_index_PIP": 1.1993,
+    "right_index_DIP": 0.6306
+   },
+   "gap_m": 0.0248,
+   "tip_err_m": 0.0043
+  },
+  "open": {
+   "joints": {
+    "right_thumb_CMC_FE": 0.35,
+    "right_thumb_CMC_AA": 0.0,
+    "right_thumb_MCP_FE": 0.0,
+    "right_thumb_MCP_AA": 0.0,
+    "right_thumb_IP": 0.0,
+    "right_index_MCP_FE": 1.5708,
+    "right_index_MCP_AA": 0.1394,
+    "right_index_PIP": 1.0775,
+    "right_index_DIP": 0.184
+   },
+   "gap_m": 0.1181,
+   "tip_err_m": 0.0117
+  }
+ }
+}

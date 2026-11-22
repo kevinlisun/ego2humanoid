@@ -1,0 +1,38 @@
+# Human (MANO) 5-finger curl -> Dex3 3-finger joint targets. Joint order per hand matches the robot actuator order.
+joint_order:
+  right: [thumb_0, thumb_1, thumb_2, index_0, index_1, middle_0, middle_1]
+  left: [thumb_0, thumb_1, thumb_2, middle_0, middle_1, index_0, index_1]
+# Human fingers whose mean curl drives each robot finger.
+finger_sources:
+  thumb: [thumb]
+  index: [index]
+  middle: [middle, ring, pinky]
+# Joint targets (rad) at curl=0 and curl=1, in the canonical order thumb_0..2, index_0..1, middle_0..1.
+open: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+closed: [0.0, 0.6, -1.0, 1.2, 1.2, 1.2, 1.2]
+# Robot links expected to carry grasp contacts.
+contact_links:
+  right: [right_hand_thumb_2_link, right_hand_index_1_link, right_hand_middle_1_link]
+  left: [left_hand_thumb_2_link, left_hand_index_1_link, left_hand_middle_1_link]
+
+# --- Sharpa Wave five-finger hand (22 joints per side) ---
+# Each human finger drives the matching robot finger; abduction joints stay neutral. Targets are
+# open/closed values in rad, inside the joint ranges of assets/robots/sharpa_wave/*.xml.
+sharpa:
+  # Joint name suffixes per finger, in the hand's actuator order.
+  joint_suffixes:
+    thumb: [CMC_FE, CMC_AA, MCP_FE, MCP_AA, IP]
+    index: [MCP_FE, MCP_AA, PIP, DIP]
+    middle: [MCP_FE, MCP_AA, PIP, DIP]
+    ring: [MCP_FE, MCP_AA, PIP, DIP]
+    pinky: [CMC, MCP_FE, MCP_AA, PIP, DIP]
+  # open (curl=0) / closed (curl=1) per joint suffix; the thumb has its own values because CMC_FE
+  # swings it across the palm (opposition) rather than curling it.
+  open:
+    thumb: {CMC_FE: 0.35, CMC_AA: 0.0, MCP_FE: 0.0, MCP_AA: 0.0, IP: 0.0}
+    finger: {CMC: 0.0, MCP_FE: 0.0, MCP_AA: 0.0, PIP: 0.0, DIP: 0.0}
+  closed:
+    thumb: {CMC_FE: 1.50, CMC_AA: 0.0, MCP_FE: 0.60, MCP_AA: 0.0, IP: 0.80}
+    finger: {CMC: 0.15, MCP_FE: 1.20, MCP_AA: 0.0, PIP: 1.30, DIP: 0.80}
+  # Joints the pinch solver may move to set the thumb-index tip gap.
+  pinch_joints: [thumb_CMC_FE, thumb_MCP_FE, thumb_IP, index_MCP_FE, index_PIP, index_DIP]

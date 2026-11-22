@@ -1,0 +1,47 @@
+# Large data and run outputs are never committed (HARNESS.md §5)
+data/*
+!data/README.md
+runs/
+weights/
+*.tar
+*.zip
+*.z01
+*.mp4
+*.mov
+*.npz
+*.npy
+*.glb
+*.usd
+*.usda
+*.usdc
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.onnx
+*.engine
+
+# Python / tooling
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+build/
+dist/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+
+# Robot meshes are fetched by scripts/fetch_g1_assets.sh
+assets/robots/*/meshes/
+*.STL
+
+# MANO is license-restricted: never commit
+assets/mano/
+assets/robots/*/assets/
+MUJOCO_LOG.TXT

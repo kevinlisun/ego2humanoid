@@ -1,0 +1,248 @@
+{
+  "ManipulationTask": {
+    "$defs": {
+      "TaskKeyframe": {
+        "description": "A hand pose relative to the object frame: T_OH = T_WO^-1 T_WH (4x4, row-major).",
+        "properties": {
+          "phase": {
+            "enum": [
+              "pre_grasp",
+              "grasp",
+              "lift",
+              "place",
+              "release"
+            ],
+            "title": "Phase",
+            "type": "string"
+          },
+          "time_s": {
+            "minimum": 0,
+            "title": "Time S",
+            "type": "number"
+          },
+          "T_object_hand": {
+            "items": {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            "title": "T Object Hand",
+            "type": "array"
+          },
+          "hand": {
+            "default": "right",
+            "enum": [
+              "left",
+              "right"
+            ],
+            "title": "Hand",
+            "type": "string"
+          },
+          "contact": {
+            "default": false,
+            "title": "Contact",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "phase",
+          "time_s",
+          "T_object_hand"
+        ],
+        "title": "TaskKeyframe",
+        "type": "object"
+      }
+    },
+    "properties": {
+      "schema_version": {
+        "default": "1.2",
+        "title": "Schema Version",
+        "type": "string"
+      },
+      "scenario": {
+        "title": "Scenario",
+        "type": "string"
+      },
+      "object_name": {
+        "title": "Object Name",
+        "type": "string"
+      },
+      "goal_xy_on_table": {
+        "maxItems": 2,
+        "minItems": 2,
+        "prefixItems": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "number"
+          }
+        ],
+        "title": "Goal Xy On Table",
+        "type": "array"
+      },
+      "keyframes": {
+        "items": {
+          "$ref": "#/$defs/TaskKeyframe"
+        },
+        "minItems": 1,
+        "title": "Keyframes",
+        "type": "array"
+      },
+      "source": {
+        "default": "manual",
+        "enum": [
+          "manual",
+          "rgb_estimated"
+        ],
+        "title": "Source",
+        "type": "string"
+      }
+    },
+    "required": [
+      "scenario",
+      "object_name",
+      "goal_xy_on_table",
+      "keyframes"
+    ],
+    "title": "ManipulationTask",
+    "type": "object"
+  },
+  "PoseGoal": {
+    "description": "Chosen static manipulation stance (ManipulationPoseGoal).",
+    "properties": {
+      "base_xy_yaw": {
+        "maxItems": 3,
+        "minItems": 3,
+        "prefixItems": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "number"
+          },
+          {
+            "type": "number"
+          }
+        ],
+        "title": "Base Xy Yaw",
+        "type": "array"
+      },
+      "pelvis_height_m": {
+        "exclusiveMinimum": 0,
+        "title": "Pelvis Height M",
+        "type": "number"
+      },
+      "waist_rpy_rad": {
+        "default": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "maxItems": 3,
+        "minItems": 3,
+        "prefixItems": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "number"
+          },
+          {
+            "type": "number"
+          }
+        ],
+        "title": "Waist Rpy Rad",
+        "type": "array"
+      },
+      "score": {
+        "title": "Score",
+        "type": "number"
+      },
+      "visible_fraction": {
+        "maximum": 1,
+        "minimum": 0,
+        "title": "Visible Fraction",
+        "type": "number"
+      },
+      "rejected": {
+        "additionalProperties": {
+          "type": "integer"
+        },
+        "description": "Reject-reason histogram",
+        "title": "Rejected",
+        "type": "object"
+      }
+    },
+    "required": [
+      "base_xy_yaw",
+      "pelvis_height_m",
+      "score",
+      "visible_fraction"
+    ],
+    "title": "PoseGoal",
+    "type": "object"
+  },
+  "ArrivalReport": {
+    "$defs": {
+      "LocoManipFailure": {
+        "enum": [
+          "NO_FEASIBLE_STATIC_MANIPULATION_POSE",
+          "REQUIRES_MULTI_STANCE_MANIPULATION",
+          "FOV_OCCLUSION",
+          "NO_NAVIGATION_PATH",
+          "LOCOMOTION_UNSUPPORTED",
+          "LOCOMOTION_FALL",
+          "LOCOMOTION_TIMEOUT",
+          "ARRIVAL_MISALIGNMENT",
+          "ARM_IK_INFEASIBLE",
+          "COLLISION",
+          "TASK_FAILED"
+        ],
+        "title": "LocoManipFailure",
+        "type": "string"
+      }
+    },
+    "properties": {
+      "arrived": {
+        "title": "Arrived",
+        "type": "boolean"
+      },
+      "pos_err_m": {
+        "minimum": 0,
+        "title": "Pos Err M",
+        "type": "number"
+      },
+      "yaw_err_rad": {
+        "minimum": 0,
+        "title": "Yaw Err Rad",
+        "type": "number"
+      },
+      "time_s": {
+        "minimum": 0,
+        "title": "Time S",
+        "type": "number"
+      },
+      "failure": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/LocoManipFailure"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      }
+    },
+    "required": [
+      "arrived",
+      "pos_err_m",
+      "yaw_err_rad",
+      "time_s"
+    ],
+    "title": "ArrivalReport",
+    "type": "object"
+  }
+}

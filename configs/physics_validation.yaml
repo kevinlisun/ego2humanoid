@@ -1,0 +1,26 @@
+# Proposed MVP QA gates; not empirical SOTA performance claims.
+rollout:
+  mode: ACTION_CONTROLLED
+  attempts: 5
+  min_successes: 3
+  base: fixed_pelvis
+  object_motion: CONTACTS_ONLY
+  state_injection_after_reset: false
+  seed_offsets: [0, 1, 2, 3, 4]
+controller:
+  control_dt_s: 0.02
+  physics_dt_s: 0.002
+  # Gains and motor limits are read from the pinned G1+Dex3 profile in M0.
+  use_asset_actuator_limits: true
+checks:
+  min_lift_m: 0.05
+  min_lift_duration_s: 0.3
+  min_xy_translation_m: 0.08
+  min_settle_duration_s: 0.5
+  max_settle_vertical_speed_m_s: 0.05
+  max_persistent_penetration_m: 0.01
+  max_base_translation_m: 0.001
+  joint_limit_violations_allowed: 0
+output:
+  accepted_only_when_physics_validated: true
+  correspondence_to_real: UNVERIFIED_MONOCULAR

@@ -1,0 +1,1236 @@
+{
+  "$defs": {
+    "ContactParams": {
+      "additionalProperties": false,
+      "properties": {
+        "priority": {
+          "affects": [
+            "sim"
+          ],
+          "default": 1,
+          "doc": "geom priority of scene objects",
+          "maximum": 5,
+          "minimum": 0,
+          "title": "Priority",
+          "type": "integer",
+          "unit": "1"
+        },
+        "condim": {
+          "affects": [
+            "sim"
+          ],
+          "default": 4,
+          "doc": "contact dimensionality (4 = torsional friction)",
+          "enum": [
+            1,
+            3,
+            4,
+            6
+          ],
+          "title": "Condim",
+          "type": "integer",
+          "unit": "1"
+        },
+        "solref": {
+          "affects": [
+            "sim"
+          ],
+          "default": [
+            0.01,
+            1.0
+          ],
+          "doc": "object contact time constant and damping ratio",
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Solref",
+          "type": "array",
+          "unit": "[s,1]"
+        },
+        "solimp": {
+          "affects": [
+            "sim"
+          ],
+          "default": [
+            0.95,
+            0.99,
+            0.001
+          ],
+          "doc": "object contact impedance d0, dwidth, width",
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Solimp",
+          "type": "array",
+          "unit": "[1,1,m]"
+        },
+        "min_slide_friction": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": 1.0,
+          "doc": "floor of the object sliding friction",
+          "maximum": 3,
+          "minimum": 0,
+          "title": "Min Slide Friction",
+          "type": "number",
+          "unit": "1"
+        },
+        "torsion_m": {
+          "affects": [
+            "sim"
+          ],
+          "default": 0.01,
+          "doc": "torsional friction coefficient",
+          "maximum": 0.05,
+          "minimum": 0,
+          "title": "Torsion M",
+          "type": "number",
+          "unit": "m"
+        },
+        "roll_m": {
+          "affects": [
+            "sim"
+          ],
+          "default": 0.0001,
+          "doc": "rolling friction coefficient",
+          "maximum": 0.01,
+          "minimum": 0,
+          "title": "Roll M",
+          "type": "number",
+          "unit": "m"
+        },
+        "impratio": {
+          "affects": [
+            "sim"
+          ],
+          "default": 10.0,
+          "doc": "friction/normal impedance ratio",
+          "maximum": 100,
+          "minimum": 1,
+          "title": "Impratio",
+          "type": "number",
+          "unit": "1"
+        },
+        "cone": {
+          "affects": [
+            "sim"
+          ],
+          "default": "elliptic",
+          "doc": "friction cone",
+          "enum": [
+            "elliptic",
+            "pyramidal"
+          ],
+          "title": "Cone",
+          "type": "string",
+          "unit": "enum"
+        },
+        "noslip_iterations": {
+          "affects": [
+            "sim"
+          ],
+          "default": 5,
+          "doc": "noslip solver iterations",
+          "maximum": 50,
+          "minimum": 0,
+          "title": "Noslip Iterations",
+          "type": "integer",
+          "unit": "1"
+        },
+        "table_friction": {
+          "affects": [
+            "sim"
+          ],
+          "default": [
+            1.0,
+            0.005,
+            0.0001
+          ],
+          "doc": "table sliding, torsional, rolling friction",
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Table Friction",
+          "type": "array",
+          "unit": "[1,m,m]"
+        }
+      },
+      "title": "ContactParams",
+      "type": "object"
+    },
+    "ObjectPhysics": {
+      "additionalProperties": false,
+      "description": "Override of one object selector: estimated physics (None keeps the estimate) and scene edits.",
+      "properties": {
+        "mass_kg": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "anyOf": [
+            {
+              "maximum": 2.0,
+              "minimum": 0.005,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "doc": "mass",
+          "title": "Mass Kg",
+          "unit": "kg"
+        },
+        "friction": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "anyOf": [
+            {
+              "maximum": 3.0,
+              "minimum": 0.05,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "doc": "sliding friction",
+          "title": "Friction",
+          "unit": "1"
+        },
+        "enabled": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": true,
+          "doc": "false drops the scene object",
+          "title": "Enabled",
+          "type": "boolean",
+          "unit": "bool"
+        },
+        "static": {
+          "affects": [
+            "sim"
+          ],
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "doc": "weld (true) or free (false); None keeps the role",
+          "title": "Static",
+          "unit": "bool"
+        },
+        "robot_collision": {
+          "affects": [
+            "sim"
+          ],
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "doc": "collide with the robot; None keeps the role",
+          "title": "Robot Collision",
+          "unit": "bool"
+        },
+        "pos_offset_m": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "doc": "shift of the scene object",
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Pos Offset M",
+          "type": "array",
+          "unit": "m"
+        },
+        "yaw_offset_deg": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": 0.0,
+          "doc": "rotation about z (mesh objects)",
+          "maximum": 180,
+          "minimum": -180,
+          "title": "Yaw Offset Deg",
+          "type": "number",
+          "unit": "deg"
+        },
+        "size_scale": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "doc": "per-axis scale (mesh objects)",
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Size Scale",
+          "type": "array",
+          "unit": "1"
+        }
+      },
+      "title": "ObjectPhysics",
+      "type": "object"
+    },
+    "PDGroup": {
+      "additionalProperties": false,
+      "properties": {
+        "kp": {
+          "affects": [
+            "sim"
+          ],
+          "doc": "position gain",
+          "exclusiveMinimum": 0,
+          "title": "Kp",
+          "type": "number",
+          "unit": "N*m/rad"
+        },
+        "kd": {
+          "affects": [
+            "sim"
+          ],
+          "doc": "damping",
+          "minimum": 0,
+          "title": "Kd",
+          "type": "number",
+          "unit": "N*m*s/rad"
+        },
+        "max_torque_nm": {
+          "affects": [
+            "sim"
+          ],
+          "doc": "limit",
+          "exclusiveMinimum": 0,
+          "title": "Max Torque Nm",
+          "type": "number",
+          "unit": "N*m"
+        },
+        "armature": {
+          "affects": [
+            "sim"
+          ],
+          "doc": "rotor",
+          "minimum": 0,
+          "title": "Armature",
+          "type": "number",
+          "unit": "kg*m^2"
+        }
+      },
+      "required": [
+        "kp",
+        "kd",
+        "max_torque_nm",
+        "armature"
+      ],
+      "title": "PDGroup",
+      "type": "object"
+    },
+    "PDGroups": {
+      "additionalProperties": false,
+      "description": "Groups keep the joint-name substrings used by `PDConfig` (`hand` = `_hand_`, `legs` = catch-all).",
+      "properties": {
+        "hand": {
+          "$ref": "#/$defs/PDGroup",
+          "default": {
+            "kp": 8.0,
+            "kd": 0.4,
+            "max_torque_nm": 6.0,
+            "armature": 0.005
+          }
+        },
+        "wrist": {
+          "$ref": "#/$defs/PDGroup",
+          "default": {
+            "kp": 40.0,
+            "kd": 2.0,
+            "max_torque_nm": 20.0,
+            "armature": 0.01
+          }
+        },
+        "shoulder": {
+          "$ref": "#/$defs/PDGroup",
+          "default": {
+            "kp": 150.0,
+            "kd": 6.0,
+            "max_torque_nm": 60.0,
+            "armature": 0.02
+          }
+        },
+        "elbow": {
+          "$ref": "#/$defs/PDGroup",
+          "default": {
+            "kp": 150.0,
+            "kd": 6.0,
+            "max_torque_nm": 60.0,
+            "armature": 0.02
+          }
+        },
+        "waist": {
+          "$ref": "#/$defs/PDGroup",
+          "default": {
+            "kp": 300.0,
+            "kd": 10.0,
+            "max_torque_nm": 100.0,
+            "armature": 0.02
+          }
+        },
+        "legs": {
+          "$ref": "#/$defs/PDGroup",
+          "default": {
+            "kp": 300.0,
+            "kd": 10.0,
+            "max_torque_nm": 150.0,
+            "armature": 0.02
+          }
+        }
+      },
+      "title": "PDGroups",
+      "type": "object"
+    },
+    "PDParams": {
+      "additionalProperties": false,
+      "properties": {
+        "groups": {
+          "$ref": "#/$defs/PDGroups",
+          "default": {
+            "hand": {
+              "armature": 0.005,
+              "kd": 0.4,
+              "kp": 8.0,
+              "max_torque_nm": 6.0
+            },
+            "wrist": {
+              "armature": 0.01,
+              "kd": 2.0,
+              "kp": 40.0,
+              "max_torque_nm": 20.0
+            },
+            "shoulder": {
+              "armature": 0.02,
+              "kd": 6.0,
+              "kp": 150.0,
+              "max_torque_nm": 60.0
+            },
+            "elbow": {
+              "armature": 0.02,
+              "kd": 6.0,
+              "kp": 150.0,
+              "max_torque_nm": 60.0
+            },
+            "waist": {
+              "armature": 0.02,
+              "kd": 10.0,
+              "kp": 300.0,
+              "max_torque_nm": 100.0
+            },
+            "legs": {
+              "armature": 0.02,
+              "kd": 10.0,
+              "kp": 300.0,
+              "max_torque_nm": 150.0
+            }
+          }
+        },
+        "heavy_hand_wrist_scale": {
+          "affects": [
+            "sim"
+          ],
+          "default": 2.5,
+          "doc": "Sharpa wrist actuator scale",
+          "maximum": 10,
+          "minimum": 1,
+          "title": "Heavy Hand Wrist Scale",
+          "type": "number",
+          "unit": "1"
+        },
+        "gravity_compensation": {
+          "affects": [
+            "sim"
+          ],
+          "default": true,
+          "doc": "robot links carry no net weight",
+          "title": "Gravity Compensation",
+          "type": "boolean",
+          "unit": "bool"
+        },
+        "timestep_s": {
+          "affects": [
+            "sim"
+          ],
+          "default": 0.002,
+          "doc": "physics timestep",
+          "maximum": 0.004,
+          "minimum": 0.0005,
+          "title": "Timestep S",
+          "type": "number",
+          "unit": "s"
+        },
+        "integrator": {
+          "affects": [
+            "sim"
+          ],
+          "default": "implicitfast",
+          "doc": "MuJoCo integrator",
+          "enum": [
+            "implicitfast",
+            "implicit",
+            "euler",
+            "rk4"
+          ],
+          "title": "Integrator",
+          "type": "string",
+          "unit": "enum"
+        }
+      },
+      "title": "PDParams",
+      "type": "object"
+    },
+    "SceneParams": {
+      "additionalProperties": false,
+      "description": "Scene-inventory role assignment and registration (`stages/reconstruction/scene/roles.py`).",
+      "properties": {
+        "source_from": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": "grip",
+          "doc": "source object: `grip` = the object under the grip wins over the task name, `name` = the name wins",
+          "enum": [
+            "grip",
+            "name"
+          ],
+          "title": "Source From",
+          "type": "string",
+          "unit": "enum"
+        },
+        "max_registration_m": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": 0.15,
+          "doc": "largest grip-to-source shift trusted; beyond it the inventory is dropped",
+          "maximum": 0.5,
+          "minimum": 0.02,
+          "title": "Max Registration M",
+          "type": "number",
+          "unit": "m"
+        }
+      },
+      "title": "SceneParams",
+      "type": "object"
+    },
+    "TableParams": {
+      "additionalProperties": false,
+      "properties": {
+        "top_z_m": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "anyOf": [
+            {
+              "maximum": 1.2,
+              "minimum": 0.3,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "doc": "table top height; None = fit to the hand path",
+          "title": "Top Z M",
+          "unit": "m"
+        }
+      },
+      "title": "TableParams",
+      "type": "object"
+    },
+    "TrajectoryParams": {
+      "additionalProperties": false,
+      "description": "Constants of `scripts/retarget_estimated.py` that shape the planned trajectory (all `plan`).",
+      "properties": {
+        "squeeze_m": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": 0.012,
+          "doc": "least squeeze: tip gap = object width - squeeze",
+          "maximum": 0.03,
+          "minimum": 0,
+          "title": "Squeeze M",
+          "type": "number",
+          "unit": "m"
+        },
+        "grip_min_n": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": 4.0,
+          "doc": "least grip force the squeeze is sized for",
+          "maximum": 30,
+          "minimum": 0,
+          "title": "Grip Min N",
+          "type": "number",
+          "unit": "N"
+        },
+        "carry_accel_m_s2": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": 3.0,
+          "doc": "held-path acceleration limit",
+          "maximum": 10,
+          "minimum": 0.5,
+          "title": "Carry Accel M S2",
+          "type": "number",
+          "unit": "m/s^2"
+        },
+        "approach_frames": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": 30,
+          "doc": "approach window before the grasp",
+          "maximum": 120,
+          "minimum": 1,
+          "title": "Approach Frames",
+          "type": "integer",
+          "unit": "frames"
+        },
+        "open_margin_m": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": 0.02,
+          "doc": "open aperture margin over the object width",
+          "maximum": 0.06,
+          "minimum": 0,
+          "title": "Open Margin M",
+          "type": "number",
+          "unit": "m"
+        },
+        "open_pad_m": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": 0.015,
+          "doc": "Sharpa pad allowance added to the open gap",
+          "maximum": 0.04,
+          "minimum": 0,
+          "title": "Open Pad M",
+          "type": "number",
+          "unit": "m"
+        },
+        "pad_reach_m": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": 0.015,
+          "doc": "reach of the finger pad above the commanded tip",
+          "maximum": 0.04,
+          "minimum": 0,
+          "title": "Pad Reach M",
+          "type": "number",
+          "unit": "m"
+        },
+        "tip_floor_m": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": 0.006,
+          "doc": "lowest the tips may close above the table",
+          "maximum": 0.03,
+          "minimum": 0,
+          "title": "Tip Floor M",
+          "type": "number",
+          "unit": "m"
+        },
+        "max_open_extra_m": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": 0.04,
+          "doc": "open aperture beyond the centre chord",
+          "maximum": 0.1,
+          "minimum": 0,
+          "title": "Max Open Extra M",
+          "type": "number",
+          "unit": "m"
+        },
+        "close_ramp_frames": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": 6,
+          "doc": "open to squeezed ramp",
+          "maximum": 30,
+          "minimum": 1,
+          "title": "Close Ramp Frames",
+          "type": "integer",
+          "unit": "frames"
+        },
+        "close_lead_frames": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": 12,
+          "doc": "start closing before the object is seen lifted",
+          "maximum": 60,
+          "minimum": 0,
+          "title": "Close Lead Frames",
+          "type": "integer",
+          "unit": "frames"
+        },
+        "hover_clearance_m": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": 0.015,
+          "doc": "hover height above the object top",
+          "maximum": 0.1,
+          "minimum": 0,
+          "title": "Hover Clearance M",
+          "type": "number",
+          "unit": "m"
+        },
+        "max_hover_rise_m": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": 0.06,
+          "doc": "highest hover above the grasp point",
+          "maximum": 0.2,
+          "minimum": 0,
+          "title": "Max Hover Rise M",
+          "type": "number",
+          "unit": "m"
+        },
+        "place_dwell_frames": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": 15,
+          "doc": "pinch holds still after the release",
+          "maximum": 90,
+          "minimum": 0,
+          "title": "Place Dwell Frames",
+          "type": "integer",
+          "unit": "frames"
+        },
+        "place_lead_frames": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": 20,
+          "doc": "receptacle frame takes over before the release",
+          "maximum": 90,
+          "minimum": 0,
+          "title": "Place Lead Frames",
+          "type": "integer",
+          "unit": "frames"
+        },
+        "place_xy_lead_frames": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": 25,
+          "doc": "receptacle xy offset fade-in",
+          "maximum": 90,
+          "minimum": 0,
+          "title": "Place Xy Lead Frames",
+          "type": "integer",
+          "unit": "frames"
+        },
+        "release_open_frames": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": 6,
+          "doc": "fingers open over this many frames",
+          "maximum": 30,
+          "minimum": 1,
+          "title": "Release Open Frames",
+          "type": "integer",
+          "unit": "frames"
+        },
+        "retreat_frames": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": 8,
+          "doc": "retreat rise duration",
+          "maximum": 60,
+          "minimum": 1,
+          "title": "Retreat Frames",
+          "type": "integer",
+          "unit": "frames"
+        },
+        "retreat_height_m": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": 0.04,
+          "doc": "retreat rise",
+          "maximum": 0.15,
+          "minimum": 0,
+          "title": "Retreat Height M",
+          "type": "number",
+          "unit": "m"
+        },
+        "retreat_blend_frames": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": 10,
+          "doc": "blend back onto the human path",
+          "maximum": 60,
+          "minimum": 0,
+          "title": "Retreat Blend Frames",
+          "type": "integer",
+          "unit": "frames"
+        },
+        "bare_place_lift_m": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": 0.003,
+          "doc": "bare-table put-down height above rest",
+          "maximum": 0.03,
+          "minimum": 0,
+          "title": "Bare Place Lift M",
+          "type": "number",
+          "unit": "m"
+        },
+        "max_offset_m": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": 0.2,
+          "doc": "object/receptacle-relative shift cap",
+          "maximum": 0.5,
+          "minimum": 0.02,
+          "title": "Max Offset M",
+          "type": "number",
+          "unit": "m"
+        },
+        "start_search_m": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": 0.03,
+          "doc": "start-offset search half range",
+          "maximum": 0.1,
+          "minimum": 0,
+          "title": "Start Search M",
+          "type": "number",
+          "unit": "m"
+        },
+        "min_object_thickness_m": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": 0.04,
+          "doc": "below this the pinch lands on the table",
+          "maximum": 0.1,
+          "minimum": 0,
+          "title": "Min Object Thickness M",
+          "type": "number",
+          "unit": "m"
+        },
+        "slab_max_width_m": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": 0.025,
+          "doc": "pinch width below which the slab proxy collides",
+          "maximum": 0.06,
+          "minimum": 0,
+          "title": "Slab Max Width M",
+          "type": "number",
+          "unit": "m"
+        },
+        "table_margin_m": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": 0.3,
+          "doc": "table margin beyond the hand reach",
+          "maximum": 1.0,
+          "minimum": 0,
+          "title": "Table Margin M",
+          "type": "number",
+          "unit": "m"
+        },
+        "table_inset_m": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": 0.05,
+          "doc": "carried object stays this far inside the rim",
+          "maximum": 0.2,
+          "minimum": 0,
+          "title": "Table Inset M",
+          "type": "number",
+          "unit": "m"
+        },
+        "table_near_edge_m": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": 0.1,
+          "doc": "closest the table may come to the pelvis",
+          "maximum": 0.4,
+          "minimum": 0,
+          "title": "Table Near Edge M",
+          "type": "number",
+          "unit": "m"
+        },
+        "scene_table_margin_m": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": 0.08,
+          "doc": "table reach past the outermost scene object",
+          "maximum": 0.4,
+          "minimum": 0,
+          "title": "Scene Table Margin M",
+          "type": "number",
+          "unit": "m"
+        },
+        "obstacle_margin_m": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": 0.02,
+          "doc": "wrist keep-off margin around objects",
+          "maximum": 0.1,
+          "minimum": 0,
+          "title": "Obstacle Margin M",
+          "type": "number",
+          "unit": "m"
+        },
+        "held_margin_m": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": 0.02,
+          "doc": "carried object keep-off margin around objects",
+          "maximum": 0.1,
+          "minimum": 0,
+          "title": "Held Margin M",
+          "type": "number",
+          "unit": "m"
+        },
+        "held_clearance_m": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": 0.005,
+          "doc": "carried object clearance above objects",
+          "maximum": 0.05,
+          "minimum": 0,
+          "title": "Held Clearance M",
+          "type": "number",
+          "unit": "m"
+        },
+        "place_clearance_m": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": 0.01,
+          "doc": "release height above the receptacle surface under the object",
+          "maximum": 0.08,
+          "minimum": 0,
+          "title": "Place Clearance M",
+          "type": "number",
+          "unit": "m"
+        },
+        "scene_objects": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": true,
+          "doc": "simulate every inventory object",
+          "title": "Scene Objects",
+          "type": "boolean",
+          "unit": "bool"
+        },
+        "adjust_stance": {
+          "affects": [
+            "sim",
+            "plan"
+          ],
+          "default": true,
+          "doc": "move the robot only if the view needs it",
+          "title": "Adjust Stance",
+          "type": "boolean",
+          "unit": "bool"
+        }
+      },
+      "title": "TrajectoryParams",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "const": "sim_params/1",
+      "default": "sim_params/1",
+      "title": "Version",
+      "type": "string"
+    },
+    "objects": {
+      "additionalProperties": {
+        "$ref": "#/$defs/ObjectPhysics"
+      },
+      "propertyNames": {
+        "minLength": 1
+      },
+      "title": "Objects",
+      "type": "object"
+    },
+    "table": {
+      "$ref": "#/$defs/TableParams",
+      "default": {
+        "top_z_m": null
+      }
+    },
+    "scene": {
+      "$ref": "#/$defs/SceneParams",
+      "default": {
+        "source_from": "grip",
+        "max_registration_m": 0.15
+      }
+    },
+    "contact": {
+      "$ref": "#/$defs/ContactParams",
+      "default": {
+        "priority": 1,
+        "condim": 4,
+        "solref": [
+          0.01,
+          1.0
+        ],
+        "solimp": [
+          0.95,
+          0.99,
+          0.001
+        ],
+        "min_slide_friction": 1.0,
+        "torsion_m": 0.01,
+        "roll_m": 0.0001,
+        "impratio": 10.0,
+        "cone": "elliptic",
+        "noslip_iterations": 5,
+        "table_friction": [
+          1.0,
+          0.005,
+          0.0001
+        ]
+      }
+    },
+    "pd": {
+      "$ref": "#/$defs/PDParams",
+      "default": {
+        "groups": {
+          "elbow": {
+            "armature": 0.02,
+            "kd": 6.0,
+            "kp": 150.0,
+            "max_torque_nm": 60.0
+          },
+          "hand": {
+            "armature": 0.005,
+            "kd": 0.4,
+            "kp": 8.0,
+            "max_torque_nm": 6.0
+          },
+          "legs": {
+            "armature": 0.02,
+            "kd": 10.0,
+            "kp": 300.0,
+            "max_torque_nm": 150.0
+          },
+          "shoulder": {
+            "armature": 0.02,
+            "kd": 6.0,
+            "kp": 150.0,
+            "max_torque_nm": 60.0
+          },
+          "waist": {
+            "armature": 0.02,
+            "kd": 10.0,
+            "kp": 300.0,
+            "max_torque_nm": 100.0
+          },
+          "wrist": {
+            "armature": 0.01,
+            "kd": 2.0,
+            "kp": 40.0,
+            "max_torque_nm": 20.0
+          }
+        },
+        "heavy_hand_wrist_scale": 2.5,
+        "gravity_compensation": true,
+        "timestep_s": 0.002,
+        "integrator": "implicitfast"
+      }
+    },
+    "trajectory": {
+      "$ref": "#/$defs/TrajectoryParams",
+      "default": {
+        "squeeze_m": 0.012,
+        "grip_min_n": 4.0,
+        "carry_accel_m_s2": 3.0,
+        "approach_frames": 30,
+        "open_margin_m": 0.02,
+        "open_pad_m": 0.015,
+        "pad_reach_m": 0.015,
+        "tip_floor_m": 0.006,
+        "max_open_extra_m": 0.04,
+        "close_ramp_frames": 6,
+        "close_lead_frames": 12,
+        "hover_clearance_m": 0.015,
+        "max_hover_rise_m": 0.06,
+        "place_dwell_frames": 15,
+        "place_lead_frames": 20,
+        "place_xy_lead_frames": 25,
+        "release_open_frames": 6,
+        "retreat_frames": 8,
+        "retreat_height_m": 0.04,
+        "retreat_blend_frames": 10,
+        "bare_place_lift_m": 0.003,
+        "max_offset_m": 0.2,
+        "start_search_m": 0.03,
+        "min_object_thickness_m": 0.04,
+        "slab_max_width_m": 0.025,
+        "table_margin_m": 0.3,
+        "table_inset_m": 0.05,
+        "table_near_edge_m": 0.1,
+        "scene_table_margin_m": 0.08,
+        "obstacle_margin_m": 0.02,
+        "held_margin_m": 0.02,
+        "held_clearance_m": 0.005,
+        "place_clearance_m": 0.01,
+        "scene_objects": true,
+        "adjust_stance": true
+      }
+    }
+  },
+  "title": "SimParams",
+  "type": "object"
+}

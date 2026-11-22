@@ -1,0 +1,223 @@
+{
+  "$defs": {
+    "ArtifactRef": {
+      "properties": {
+        "uri": {
+          "description": "Remote URI or sandbox-relative/local file",
+          "minLength": 1,
+          "title": "Uri",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        }
+      },
+      "required": [
+        "uri"
+      ],
+      "title": "ArtifactRef",
+      "type": "object"
+    },
+    "RobotRequest": {
+      "description": "Robot chosen by product; actual joint names/asset resolved by M0 probe.",
+      "properties": {
+        "robot_id": {
+          "const": "unitree_g1_dex3_v1",
+          "default": "unitree_g1_dex3_v1",
+          "title": "Robot Id",
+          "type": "string"
+        },
+        "expected_joint_dof": {
+          "const": 43,
+          "default": 43,
+          "title": "Expected Joint Dof",
+          "type": "integer"
+        },
+        "base_mode": {
+          "const": "fixed_pelvis",
+          "default": "fixed_pelvis",
+          "title": "Base Mode",
+          "type": "string"
+        },
+        "arms_actuated": {
+          "const": true,
+          "default": true,
+          "title": "Arms Actuated",
+          "type": "boolean"
+        },
+        "fingers_actuated": {
+          "const": true,
+          "default": true,
+          "title": "Fingers Actuated",
+          "type": "boolean"
+        },
+        "robot_asset_profile": {
+          "default": "protomotions_g1_dex3_review_required",
+          "title": "Robot Asset Profile",
+          "type": "string"
+        }
+      },
+      "title": "RobotRequest",
+      "type": "object"
+    },
+    "VideoSpec": {
+      "properties": {
+        "video": {
+          "$ref": "#/$defs/ArtifactRef"
+        },
+        "camera_id": {
+          "default": "ego0",
+          "title": "Camera Id",
+          "type": "string"
+        },
+        "fps_nominal": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fps Nominal"
+        },
+        "width": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Width"
+        },
+        "height": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Height"
+        },
+        "intrinsics_3x3": {
+          "anyOf": [
+            {
+              "items": {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Intrinsics 3X3"
+        },
+        "camera_intrinsics_source": {
+          "default": "unknown",
+          "enum": [
+            "unknown",
+            "estimated_from_rgb",
+            "measured"
+          ],
+          "title": "Camera Intrinsics Source",
+          "type": "string"
+        }
+      },
+      "required": [
+        "video"
+      ],
+      "title": "VideoSpec",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "schema_version": {
+      "const": "1.2",
+      "default": "1.2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "episode_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{0,127}$",
+      "title": "Episode Id",
+      "type": "string"
+    },
+    "video": {
+      "$ref": "#/$defs/VideoSpec"
+    },
+    "task_description": {
+      "default": "grasp, lift, translate and place a single rigid object",
+      "title": "Task Description",
+      "type": "string"
+    },
+    "robot": {
+      "$ref": "#/$defs/RobotRequest"
+    },
+    "target_object_hint": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Target Object Hint"
+    },
+    "scene_seed": {
+      "default": 0,
+      "title": "Scene Seed",
+      "type": "integer"
+    },
+    "usage_class": {
+      "const": "noncommercial_research",
+      "default": "noncommercial_research",
+      "title": "Usage Class",
+      "type": "string"
+    },
+    "physics_required": {
+      "const": true,
+      "default": true,
+      "title": "Physics Required",
+      "type": "boolean"
+    },
+    "scale_policy": {
+      "const": "rgb_scene_prior_with_uncertainty",
+      "default": "rgb_scene_prior_with_uncertainty",
+      "title": "Scale Policy",
+      "type": "string"
+    }
+  },
+  "required": [
+    "episode_id",
+    "video"
+  ],
+  "title": "EpisodeInput",
+  "type": "object"
+}

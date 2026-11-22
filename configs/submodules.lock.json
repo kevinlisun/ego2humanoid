@@ -1,0 +1,69 @@
+{
+  "status": "PINNED",
+  "pinned_on": "2026-11-10",
+  "submodules": {
+    "FAH": {
+      "url": "https://github.com/noahcao/FAH.git",
+      "path": "third_party/FAH",
+      "commit_sha": "2b13dd9c7fc04ad173a76ab89beac9266d2d59ac",
+      "checkpoint_sha256": null,
+      "license_checked": true,
+      "code_license": "Apache-2.0",
+      "weights_license": "see third_party/FAH/WEIGHTS_LICENSE (non-commercial)"
+    },
+    "spider": {
+      "url": "https://github.com/facebookresearch/spider.git",
+      "path": "third_party/spider",
+      "commit_sha": "44717007de41cbef7565dff7ff9f4453557a2d3d",
+      "license_checked": true,
+      "code_license": "CC-BY-NC-4.0"
+    },
+    "SimFoundry": {
+      "url": "https://github.com/NVlabs/SimFoundry.git",
+      "path": "third_party/SimFoundry",
+      "commit_sha": "9e34ebefcd020583fbb755a8b57268dce78eca26",
+      "license_checked": true,
+      "code_license": "Apache-2.0 (see THIRD_PARTY_LICENSES.md for bundled components)"
+    },
+    "EgoTac": {
+      "url": "https://github.com/Mr-Zwkid/EgoTac.git",
+      "path": "third_party/EgoTac",
+      "commit_sha": "87ba7059304bd581050315f3a9af3029710ed690",
+      "checkpoint_sha256": null,
+      "license_checked": false,
+      "code_license": "none declared in the repository (verify before redistribution)",
+      "weights_license": "Apache-2.0 per Hugging Face model card wkzhang/EgoTac"
+    },
+    "GR00T-WholeBodyControl": {
+      "url": "https://github.com/NVlabs/GR00T-WholeBodyControl.git",
+      "path": "third_party/GR00T-WholeBodyControl",
+      "commit_sha": "1e1ec4f5f27e6c3e03048f693bd7c60cce04afda",
+      "license_checked": true,
+      "code_license": "Apache-2.0",
+      "weights_license": "NVIDIA Open Model License (decoupled_wbc/sim2mujoco/resources/robots/g1/policy/)",
+      "checkpoint_sha256": {
+        "decoupled_wbc/sim2mujoco/resources/robots/g1/policy/GR00T-WholeBodyControl-Balance.onnx": "f645da599d4ca3d29ed273c8f4712620bb680d34977469ca3aeabe5bb9631c18",
+        "decoupled_wbc/sim2mujoco/resources/robots/g1/policy/GR00T-WholeBodyControl-Walk.onnx": "7c82255b6905ffcc4468fa7f8ddcf7b70db168cf1042107ccab887cb6a8e5407"
+      },
+      "used_for": "Decoupled WBC lower-body (legs + waist) RL policies, track L"
+    }
+  },
+  "robot": {
+    "profile": "unitree_g1_dex3_v1",
+    "expected_joint_dof": 43,
+    "source": "unitreerobotics/unitree_ros@725b59b6de39a26c425632120c89f23c49a36f1e (BSD-3-Clause)",
+    "asset_sha256": "see assets/robots/g1_dex3/robot_joint_order.json (mjcf_sha256)",
+    "og_mapping_verified": false
+  },
+  "assets": {
+    "sharpa_wave": {
+      "url": "https://github.com/google-deepmind/mujoco_menagerie.git",
+      "path": "assets/robots/sharpa_wave",
+      "subdir": "sharpa_wave",
+      "commit_sha": "370c43965323c0944b433b202aac5058b5f907a9",
+      "license_checked": true,
+      "code_license": "Apache-2.0",
+      "fetched_by": "scripts/fetch_sharpa_assets.sh"
+    }
+  }
+}

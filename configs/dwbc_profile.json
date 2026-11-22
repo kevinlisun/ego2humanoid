@@ -1,0 +1,408 @@
+{
+ "controller": "decoupled_wbc",
+ "asset": "g1_29dof_with_hand_rev_1_0.xml",
+ "walk": [
+  {
+   "vel": [
+    0.2,
+    0,
+    0
+   ],
+   "falls": 0,
+   "lateral_key": "drift = lateral m/s",
+   "speed": 0.159,
+   "yaw_rate": -0.014,
+   "drift": -0.013
+  },
+  {
+   "vel": [
+    0.4,
+    0,
+    0
+   ],
+   "falls": 0,
+   "lateral_key": "drift = lateral m/s",
+   "speed": 0.327,
+   "yaw_rate": -0.003,
+   "drift": -0.007
+  },
+  {
+   "vel": [
+    0.6,
+    0,
+    0
+   ],
+   "falls": 0,
+   "lateral_key": "drift = lateral m/s",
+   "speed": 0.513,
+   "yaw_rate": 0.006,
+   "drift": 0.015
+  },
+  {
+   "vel": [
+    -0.3,
+    0,
+    0
+   ],
+   "falls": 0,
+   "lateral_key": "drift = lateral m/s",
+   "speed": -0.276,
+   "yaw_rate": -0.023,
+   "drift": 0.017
+  },
+  {
+   "vel": [
+    0,
+    0.2,
+    0
+   ],
+   "falls": 0,
+   "lateral_key": "drift = lateral m/s",
+   "speed": 0.003,
+   "yaw_rate": -0.003,
+   "drift": 0.13
+  },
+  {
+   "vel": [
+    0,
+    0,
+    0.3
+   ],
+   "falls": 0,
+   "lateral_key": "drift = lateral m/s",
+   "speed": 0.008,
+   "yaw_rate": 0.268,
+   "drift": 0.004
+  },
+  {
+   "vel": [
+    0,
+    0,
+    -0.3
+   ],
+   "falls": 0,
+   "lateral_key": "drift = lateral m/s",
+   "speed": -0.013,
+   "yaw_rate": -0.312,
+   "drift": -0.012
+  },
+  {
+   "vel": [
+    0.3,
+    0,
+    0.3
+   ],
+   "falls": 0,
+   "lateral_key": "drift = lateral m/s",
+   "speed": 0.136,
+   "yaw_rate": 0.288,
+   "drift": 0.174
+  }
+ ],
+ "posture": [
+  {
+   "height": 0.5,
+   "rpy": [
+    0,
+    0,
+    0
+   ],
+   "stable": true,
+   "pelvis_z": 0.488
+  },
+  {
+   "height": 0.5,
+   "rpy": [
+    0,
+    0.3,
+    0
+   ],
+   "stable": true,
+   "pelvis_z": 0.487
+  },
+  {
+   "height": 0.5,
+   "rpy": [
+    0,
+    0.5,
+    0
+   ],
+   "stable": true,
+   "pelvis_z": 0.485
+  },
+  {
+   "height": 0.5,
+   "rpy": [
+    0,
+    -0.3,
+    0
+   ],
+   "stable": true,
+   "pelvis_z": 0.491
+  },
+  {
+   "height": 0.5,
+   "rpy": [
+    0.2,
+    0,
+    0
+   ],
+   "stable": true,
+   "pelvis_z": 0.488
+  },
+  {
+   "height": 0.5,
+   "rpy": [
+    0,
+    0,
+    0.5
+   ],
+   "stable": true,
+   "pelvis_z": 0.487
+  },
+  {
+   "height": 0.6,
+   "rpy": [
+    0,
+    0,
+    0
+   ],
+   "stable": true,
+   "pelvis_z": 0.581
+  },
+  {
+   "height": 0.6,
+   "rpy": [
+    0,
+    0.3,
+    0
+   ],
+   "stable": true,
+   "pelvis_z": 0.585
+  },
+  {
+   "height": 0.6,
+   "rpy": [
+    0,
+    0.5,
+    0
+   ],
+   "stable": true,
+   "pelvis_z": 0.588
+  },
+  {
+   "height": 0.6,
+   "rpy": [
+    0,
+    -0.3,
+    0
+   ],
+   "stable": true,
+   "pelvis_z": 0.578
+  },
+  {
+   "height": 0.6,
+   "rpy": [
+    0.2,
+    0,
+    0
+   ],
+   "stable": true,
+   "pelvis_z": 0.58
+  },
+  {
+   "height": 0.6,
+   "rpy": [
+    0,
+    0,
+    0.5
+   ],
+   "stable": true,
+   "pelvis_z": 0.582
+  },
+  {
+   "height": 0.7,
+   "rpy": [
+    0,
+    0,
+    0
+   ],
+   "stable": true,
+   "pelvis_z": 0.701
+  },
+  {
+   "height": 0.7,
+   "rpy": [
+    0,
+    0.3,
+    0
+   ],
+   "stable": true,
+   "pelvis_z": 0.704
+  },
+  {
+   "height": 0.7,
+   "rpy": [
+    0,
+    0.5,
+    0
+   ],
+   "stable": true,
+   "pelvis_z": 0.706
+  },
+  {
+   "height": 0.7,
+   "rpy": [
+    0,
+    -0.3,
+    0
+   ],
+   "stable": true,
+   "pelvis_z": 0.697
+  },
+  {
+   "height": 0.7,
+   "rpy": [
+    0.2,
+    0,
+    0
+   ],
+   "stable": true,
+   "pelvis_z": 0.701
+  },
+  {
+   "height": 0.7,
+   "rpy": [
+    0,
+    0,
+    0.5
+   ],
+   "stable": true,
+   "pelvis_z": 0.699
+  },
+  {
+   "height": 0.74,
+   "rpy": [
+    0,
+    0,
+    0
+   ],
+   "stable": true,
+   "pelvis_z": 0.747
+  },
+  {
+   "height": 0.74,
+   "rpy": [
+    0,
+    0.3,
+    0
+   ],
+   "stable": true,
+   "pelvis_z": 0.75
+  },
+  {
+   "height": 0.74,
+   "rpy": [
+    0,
+    0.5,
+    0
+   ],
+   "stable": true,
+   "pelvis_z": 0.752
+  },
+  {
+   "height": 0.74,
+   "rpy": [
+    0,
+    -0.3,
+    0
+   ],
+   "stable": true,
+   "pelvis_z": 0.749
+  },
+  {
+   "height": 0.74,
+   "rpy": [
+    0.2,
+    0,
+    0
+   ],
+   "stable": true,
+   "pelvis_z": 0.747
+  },
+  {
+   "height": 0.74,
+   "rpy": [
+    0,
+    0,
+    0.5
+   ],
+   "stable": true,
+   "pelvis_z": 0.748
+  },
+  {
+   "height": 0.8,
+   "rpy": [
+    0,
+    0,
+    0
+   ],
+   "stable": true,
+   "pelvis_z": 0.765
+  },
+  {
+   "height": 0.8,
+   "rpy": [
+    0,
+    0.3,
+    0
+   ],
+   "stable": true,
+   "pelvis_z": 0.765
+  },
+  {
+   "height": 0.8,
+   "rpy": [
+    0,
+    0.5,
+    0
+   ],
+   "stable": true,
+   "pelvis_z": 0.766
+  },
+  {
+   "height": 0.8,
+   "rpy": [
+    0,
+    -0.3,
+    0
+   ],
+   "stable": true,
+   "pelvis_z": 0.767
+  },
+  {
+   "height": 0.8,
+   "rpy": [
+    0.2,
+    0,
+    0
+   ],
+   "stable": true,
+   "pelvis_z": 0.766
+  },
+  {
+   "height": 0.8,
+   "rpy": [
+    0,
+    0,
+    0.5
+   ],
+   "stable": true,
+   "pelvis_z": 0.766
+  }
+ ],
+ "stop": {
+  "stop_distance_m": 0.076,
+  "settle_s": 0.55
+ }
+}

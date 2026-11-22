@@ -1,0 +1,8 @@
+{
+ "name": "g1_head_cam_v1",
+ "mjcf_camera": "d435",
+ "parent_body": "torso_link",
+ "image_hw": [360, 640],
+ "fovy_deg": 42.5,
+ "note": "Intel D435 colour 16:9 (69.4 x 42.5 deg). Mounted on torso_link (the G1 has no neck): gaze is set by waist pose and base stance. Pose constants live in stages/replay/mjcf_scene.py (D435_*)."
+}

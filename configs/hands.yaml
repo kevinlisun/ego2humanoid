@@ -1,0 +1,5 @@
+# Hand-stage backend selection. FAH is the pose backend; EgoTac only adds per-vertex tactile.
+backend: fah
+tactile:
+  backend: none  # none | egotac
+  npz_name: tactile_egotac.npz

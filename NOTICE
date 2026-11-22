@@ -1,0 +1,9 @@
+Ego2Humanoid
+Copyright 2026 kevinlisun
+
+This product includes software developed by kevinlisun, licensed under the
+Apache License, Version 2.0 (see LICENSE).
+
+Third-party components (git submodules under third_party/, robot models under
+assets/robots/, datasets and model weights) are distributed under their own
+licences; see docs/LICENSES.md.

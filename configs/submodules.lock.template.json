@@ -1,0 +1,15 @@
+{
+  "status": "TEMPLATE_UNPINNED_DO_NOT_DEPLOY",
+  "submodules": {
+    "FAH": {"url": "https://github.com/noahcao/FAH.git", "commit_sha": null, "checkpoint_sha256": null, "license_checked": false},
+    "spider": {"url": "https://github.com/facebookresearch/spider.git", "commit_sha": null, "license_checked": false},
+    "SimFoundry": {"url": "https://github.com/NVlabs/SimFoundry.git", "commit_sha": null, "license_checked": false}
+  },
+  "robot": {
+    "profile": "unitree_g1_dex3_v1",
+    "expected_joint_dof": 43,
+    "reference": "https://nvlabs.github.io/ProtoMotions/robots/g1_dex3.html",
+    "asset_sha256": null,
+    "og_mapping_verified": false
+  }
+}

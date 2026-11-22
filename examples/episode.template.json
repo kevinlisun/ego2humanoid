@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.2",
+  "episode_id": "ego_grasp_001",
+  "video": {
+    "video": {"uri": "videos/ego_grasp_001.mp4"},
+    "camera_id": "ego0",
+    "camera_intrinsics_source": "unknown"
+  },
+  "task_description": "grasp, lift, translate and place a single rigid object",
+  "robot": {
+    "robot_id": "unitree_g1_dex3_v1",
+    "expected_joint_dof": 43,
+    "base_mode": "fixed_pelvis",
+    "arms_actuated": true,
+    "fingers_actuated": true,
+    "robot_asset_profile": "protomotions_g1_dex3_review_required"
+  },
+  "target_object_hint": null,
+  "scene_seed": 0,
+  "usage_class": "noncommercial_research",
+  "physics_required": true,
+  "scale_policy": "rgb_scene_prior_with_uncertainty"
+}

@@ -1,0 +1,10 @@
+{
+ "name": "tabletop_v1",
+ "robot_start_xyyaw": [0.0, 0.0, 0.0],
+ "table": {"center_xy": [3.0, 0.0], "half_size": [0.3, 0.6, 0.02], "top_z": 0.75},
+ "obstacles": [
+  {"name": "crate", "center_xy": [1.6, 0.35], "half_size": [0.2, 0.2, 0.25]}
+ ],
+ "object": {"name": "box", "half_size": [0.015, 0.015, 0.045], "xy_on_table": [-0.2, 0.0], "mass": 0.1},
+ "goal_zone": {"xy_on_table": [-0.2, -0.12], "radius": 0.07}
+}

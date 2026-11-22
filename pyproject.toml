@@ -1,0 +1,59 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ego2humanoid"
+version = "0.3.0"
+description = "Egocentric RGB -> G1 Dex3 physics-validated manipulation pipeline"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.10"
+dependencies = ["pydantic>=2.6,<3", "numpy>=1.26,<3", "typer>=0.12,<1", "pyyaml>=6,<7"]
+
+[project.scripts]
+ego2humanoid = "cli.main:app"
+
+[project.optional-dependencies]
+video = ["av>=12", "opencv-python-headless>=4.9"]
+sim = ["mujoco>=3.2"]
+hot3d = ["trimesh>=4"]
+egodex = ["h5py>=3.10", "remotezip>=0.12"]
+hands = ["scipy>=1.11"]
+objects = [
+    "networkx>=3.4.2",
+    "scipy>=1.15.3",
+    "trimesh>=5.2.0",
+    "xatlas>=0.0.11",
+    "opencv-python-headless>=4.9",
+    "coacd>=1.0.5",
+    "pillow>=10",
+]
+wbc = [
+    "onnxruntime>=1.17",
+]
+
+[dependency-groups]
+dev = ["pytest>=8,<10", "pyyaml>=6,<7", "ruff>=0.6,<1"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+  "smoke: end-to-end stage test on synthetic input",
+  "realdata: needs real data under data/ (auto-skipped when missing)",
+  "system: full pipeline on one episode",
+  "gpu: needs a CUDA GPU",
+]
+
+[tool.ruff]
+line-length = 110
+target-version = "py310"
+src = ["src", "tests"]
+# Vendored upstream code is never ours to reformat; `ruff format .` would otherwise rewrite it.
+extend-exclude = ["third_party", "data", "assets"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

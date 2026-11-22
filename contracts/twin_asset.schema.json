@@ -1,0 +1,233 @@
+{
+  "$defs": {
+    "Hollow": {
+      "additionalProperties": false,
+      "description": "Open-topped container: the inner floor height above the asset origin.",
+      "properties": {
+        "inner_floor_z_m": {
+          "exclusiveMinimum": 0,
+          "title": "Inner Floor Z M",
+          "type": "number"
+        }
+      },
+      "required": [
+        "inner_floor_z_m"
+      ],
+      "title": "Hollow",
+      "type": "object"
+    },
+    "PhysicsPrior": {
+      "additionalProperties": false,
+      "properties": {
+        "density_kg_m3": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 20000,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Density Kg M3"
+        },
+        "mass_kg": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 50,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Mass Kg"
+        },
+        "friction": {
+          "default": 1.0,
+          "maximum": 3,
+          "minimum": 0,
+          "title": "Friction",
+          "type": "number"
+        },
+        "restitution": {
+          "default": 0.0,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Restitution",
+          "type": "number"
+        },
+        "source": {
+          "default": "prior",
+          "enum": [
+            "prior",
+            "measured",
+            "rsi"
+          ],
+          "title": "Source",
+          "type": "string"
+        }
+      },
+      "title": "PhysicsPrior",
+      "type": "object"
+    },
+    "RestPose": {
+      "additionalProperties": false,
+      "description": "A stable resting orientation: which bbox face points down and how likely it is.",
+      "properties": {
+        "down_face": {
+          "enum": [
+            "+x",
+            "-x",
+            "+y",
+            "-y",
+            "+z",
+            "-z"
+          ],
+          "title": "Down Face",
+          "type": "string"
+        },
+        "probability": {
+          "exclusiveMinimum": 0,
+          "maximum": 1,
+          "title": "Probability",
+          "type": "number"
+        }
+      },
+      "required": [
+        "down_face",
+        "probability"
+      ],
+      "title": "RestPose",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "const": "twin_asset/1",
+      "default": "twin_asset/1",
+      "title": "Version",
+      "type": "string"
+    },
+    "id": {
+      "pattern": "^[a-z][a-z0-9_]*$",
+      "title": "Id",
+      "type": "string"
+    },
+    "category": {
+      "minLength": 1,
+      "title": "Category",
+      "type": "string"
+    },
+    "synonyms": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Synonyms",
+      "type": "array"
+    },
+    "colour_hsv": {
+      "description": "dominant colours: hue deg [0,360), saturation, value in [0,1]",
+      "items": {
+        "maxItems": 3,
+        "minItems": 3,
+        "prefixItems": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "number"
+          },
+          {
+            "type": "number"
+          }
+        ],
+        "type": "array"
+      },
+      "minItems": 1,
+      "title": "Colour Hsv",
+      "type": "array"
+    },
+    "size_m": {
+      "description": "bbox x, y, z in metres; the authoritative scale",
+      "maxItems": 3,
+      "minItems": 3,
+      "prefixItems": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "number"
+        }
+      ],
+      "title": "Size M",
+      "type": "array"
+    },
+    "up_axis": {
+      "const": "+z",
+      "default": "+z",
+      "title": "Up Axis",
+      "type": "string"
+    },
+    "rest_poses": {
+      "items": {
+        "$ref": "#/$defs/RestPose"
+      },
+      "minItems": 1,
+      "title": "Rest Poses",
+      "type": "array"
+    },
+    "physics": {
+      "$ref": "#/$defs/PhysicsPrior"
+    },
+    "hollow": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Hollow"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "licence": {
+      "minLength": 1,
+      "title": "Licence",
+      "type": "string"
+    },
+    "author": {
+      "minLength": 1,
+      "title": "Author",
+      "type": "string"
+    },
+    "sha256": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "file name -> hex digest",
+      "title": "Sha256",
+      "type": "object"
+    }
+  },
+  "required": [
+    "id",
+    "category",
+    "colour_hsv",
+    "size_m",
+    "rest_poses",
+    "physics",
+    "licence",
+    "author"
+  ],
+  "title": "AssetSpec",
+  "type": "object"
+}
